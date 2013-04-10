@@ -10,6 +10,7 @@ import javalib.colors.*;
 import javalib.impworld.*;
 import javalib.worldimages.*;
 import java.util.Random;
+import java.awt.event.*;
 /**
  *
  * @author alpemberton
@@ -28,9 +29,17 @@ public class Mines extends World{
         
     }
     
-    public void newMethod(){
+    
+    
+    public void onMouseClicked(Posn p){
+        
+        int col = (p.x/Space.SIZE);
+        int row = (p.y/Space.SIZE);
+        this.board.spaces[row][col].clicked=true;      
+        this.makeImage();
         
     }
+    
     
     public void layBombs(){
         Random myRandom = new Random();
@@ -53,7 +62,7 @@ public class Mines extends World{
      */
     public WorldImage background =
             new RectangleImage(new Posn(this.width / 2, this.height / 2),
-            this.width, this.height, Color.LIGHT_GRAY);
+            this.width, this.height, Color.MAGENTA);
     
      public WorldImage makeImage() {
         WorldImage worldImage = this.board.spacesImage(this.background);

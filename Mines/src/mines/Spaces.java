@@ -23,8 +23,7 @@ public class Spaces {
                 spaces[x][y] = new Space(x,y);
                 
             }
-        }
-        
+        }        
     }
     
     public void incrementSurroundings(int r, int c){

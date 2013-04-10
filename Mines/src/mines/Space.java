@@ -21,12 +21,14 @@ public class Space {
     int row;
     int num;
     boolean bomb;
+    boolean clicked;
     
-    public Space(int c, int r){
+    public Space(int r, int c){
         col=c;
         row=r;
         num=0;
         bomb=false;
+        clicked=false;
     }
     
     boolean hasBomb(){
@@ -45,6 +47,7 @@ public class Space {
     }
     
     WorldImage spaceImage() {
+        if(this.clicked){
         Posn textposn = getPosn();
         TextImage image = new TextImage(textposn, this.printNumBomb(), Color.red);
         WorldImage myImage= new OverlayImages(
@@ -52,6 +55,13 @@ public class Space {
                 new RectangleImage(this.getPosn(), SIZE - 2, SIZE - 2, Color.LIGHT_GRAY));
         myImage= new OverlayImages(myImage, image);
         return myImage;
+    }
+        else{
+            WorldImage myImage2= new OverlayImages(
+                new RectangleImage(this.getPosn(), SIZE, SIZE, Color.DARK_GRAY),
+                new RectangleImage(this.getPosn(), SIZE - 2, SIZE - 2, Color.LIGHT_GRAY));
+        return myImage2;
+        }
     }
     
     private Posn getPosn() {
