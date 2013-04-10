@@ -28,6 +28,10 @@ public class Mines extends World{
         
     }
     
+    public void newMethod(){
+        
+    }
+    
     public void layBombs(){
         Random myRandom = new Random();
         for(int i=0; i<NUM_BOMBS; i++){
