@@ -64,7 +64,7 @@ public class Space {
         }
     }
     
-    private Posn getPosn() {
+    public Posn getPosn() {
         int pinholeX = (this.col * Space.SIZE) + Space.HALF_SIZE;
         int pinholeY = (this.row * Space.SIZE) + Space.HALF_SIZE;
         return new Posn(pinholeX, pinholeY);

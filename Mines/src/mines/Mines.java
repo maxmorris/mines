@@ -21,7 +21,7 @@ public class Mines extends World{
     int width = Mines.MAX_COLS * Space.SIZE;
     int height = Mines.MAX_ROWS * Space.SIZE;
     Spaces board;
-    public static int NUM_BOMBS = 50;
+    public static int NUM_BOMBS = 99;
     
     public Mines() {
         super();
@@ -33,9 +33,75 @@ public class Mines extends World{
     
     public void onMouseClicked(Posn p){
         
-        int col = (p.x/Space.SIZE);
-        int row = (p.y/Space.SIZE);
-        this.board.spaces[row][col].clicked=true;      
+        int c = (p.x/Space.SIZE);
+        int r = (p.y/Space.SIZE);
+        this.board.spaces[r][c].clicked=true;
+        if(this.board.spaces[r][c].num==0){
+            if(c-1>-1){
+            if(r-1>-1){
+                if(!this.board.spaces[r-1][c-1].clicked){
+                this.onMouseClicked(this.board.spaces[r-1][c-1].getPosn());}
+                if(!this.board.spaces[r][c-1].clicked){
+                    this.onMouseClicked(this.board.spaces[r][c-1].getPosn());
+                }
+            }
+            if(r+1<Mines.MAX_ROWS){
+                if(!this.board.spaces[r+1][c-1].clicked){
+                    this.onMouseClicked(this.board.spaces[r+1][c-1].getPosn());
+                }
+            }
+        }
+        if(r-1>-1){
+            if(!this.board.spaces[r-1][c].clicked){
+                this.onMouseClicked(this.board.spaces[r-1][c].getPosn());
+            }
+        }
+        if(r+1<Mines.MAX_ROWS){
+            if(!this.board.spaces[r+1][c].clicked){
+                this.onMouseClicked(this.board.spaces[r+1][c].getPosn());
+            }
+        }
+        if(c+1<Mines.MAX_COLS){
+            if(r-1>-1){
+                if(!this.board.spaces[r-1][c+1].clicked){
+                    this.onMouseClicked(this.board.spaces[r-1][c+1].getPosn());
+                }
+                if(!this.board.spaces[r][c+1].clicked){
+                    this.onMouseClicked(this.board.spaces[r][c+1].getPosn());
+                }
+            }
+            if(r+1<Mines.MAX_ROWS){
+                if(!this.board.spaces[r+1][c+1].clicked){
+                    this.onMouseClicked(this.board.spaces[r+1][c+1].getPosn());
+                }
+            }
+        }
+            
+//        if(!this.board.spaces[row-1][col-1].bomb){
+//            onMouseClicked(this.board.spaces[row-1][col-1].getPosn());
+//        }
+//        if(!this.board.spaces[row-1][col].bomb){
+//            onMouseClicked(this.board.spaces[row-1][col].getPosn());
+//        }
+//        if(!this.board.spaces[row-1][col+1].bomb){
+//            onMouseClicked(this.board.spaces[row-1][col+1].getPosn());
+//        }
+//        if(!this.board.spaces[row][col-1].bomb){
+//            onMouseClicked(this.board.spaces[row][col-1].getPosn());
+//        }
+//        if(!this.board.spaces[row][col+1].bomb){
+//            onMouseClicked(this.board.spaces[row][col+1].getPosn());
+//        }
+//        if(!this.board.spaces[row+1][col-1].bomb){
+//            onMouseClicked(this.board.spaces[row+1][col-1].getPosn());
+//        }
+//        if(!this.board.spaces[row+1][col].bomb){
+//            onMouseClicked(this.board.spaces[row+1][col].getPosn());
+//        }
+//        if(!this.board.spaces[row+1][col+1].bomb){
+//            onMouseClicked(this.board.spaces[row+1][col+1].getPosn());
+//        }
+        }
         this.makeImage();
         
     }
@@ -51,6 +117,7 @@ public class Mines extends World{
             }
             else{
                 board.spaces[x][y].bomb=true;
+                board.spaces[x][y].num=10;
                 board.incrementSurroundings(x,y);
             }
             
